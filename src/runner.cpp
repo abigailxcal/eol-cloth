@@ -15,14 +15,14 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "online\Camera.h"
-#include "online\Program.h"
-#include "online\MatrixStack.h"
-#include "online\GLSL.h"
+#include "online/Camera.h"
+#include "online/Program.h"
+#include "online/MatrixStack.h"
+#include "online/GLSL.h"
 
 #endif // EOL_ONLINE
 
-#include <Eigen\Core>
+#include <Eigen/Core>
 
 #include <memory>
 #include <iostream>
@@ -294,7 +294,7 @@ void start_running(const string &GENSET_FILE, const string &SIMSET_FILE)
 		init_online(SIMSET_FILE);
 		run_online();
 #else
-		cout << "ERROR: Attempting to run in online mode without building the online libraries." << endl;
+		std::cout << "ERROR: Attempting to run in online mode without building the online libraries." << endl;
 #endif // EOL_ONLINE
 	}
 	else {

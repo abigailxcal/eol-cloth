@@ -8,7 +8,7 @@
 
 #include "Cloth.h"
 
-#include "external\ArcSim\mesh.hpp"
+#include "external/ArcSim/mesh.hpp"
 
 #define EIGEN_DONT_ALIGN_STATICALLY
 #include <Eigen/Dense>

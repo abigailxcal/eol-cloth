@@ -11,10 +11,12 @@ PROJECT(eol-cloth)
 
 # COMPILER OPTIONS
 
+
+
 OPTION(ONLINE "Build with online rendering supported" ON)
 
 # Include support for one or multiple solvers
-OPTION(MOSEK "Build with Mosek support" OFF)
+OPTION(MOSEK "Build with Mosek support" ON)
 OPTION(GUROBI "Build with Gurobi support" OFF)
 OPTION(IGL "Build with libIGL support" OFF) # Not used in the current version
 
@@ -23,19 +25,19 @@ OPTION(IGL "Build with libIGL support" OFF) # Not used in the current version
 # These paths are machine specific
 # These paths are examples
 
- SET(DEF_DIR_EIGEN "D:\\c++\\eigen-3.3.4")
+ SET(DEF_DIR_EIGEN "/opt/homebrew/Cellar/eigen/3.4.0_1")
  
  IF(${ONLINE})
-	 SET(DEF_DIR_GLM "D:\\c++\\glm-0.9.8.4")
-	 SET(DEF_DIR_GLFW "D:\\c++\\glfw-3.2.1")
-	 SET(DEF_DIR_GLEW "D:\\c++\\glew-2.1.0")
+	 SET(DEF_DIR_GLM "/opt/homebrew/Cellar/glm/1.0.1/lib")
+	 SET(DEF_DIR_GLFW "/opt/homebrew/Cellar/glfw/3.4/lib")
+	 SET(DEF_DIR_GLEW "/opt/homebrew/Cellar/glew/2.2.0_1/lib")
 	 ADD_DEFINITIONS(-DEOLC_ONLINE)
  ENDIF()
  
  IF(${MOSEK}) 
-	 SET(DEF_DIR_MOSEK "C:\\Program Files\\Mosek\\8\\tools\\platform\\win64x86") # Location of /h and /bin
-	 SET(DEF_BINARY_MOSEK "mosek64_8_1.lib") # Platform specific
-	 ADD_DEFINITIONS(-DkMosekLicensePath="C:/Users/weid691/mosek/mosek.lic") # Path to license file
+	 SET(DEF_DIR_MOSEK "/Users/abigailcalderon/Downloads/mosek/11.0/tools/platform/osxaarch64") # Location of /h and /bin
+	 SET(DEF_BINARY_MOSEK "libmosek64.11.0.dylib") # Platform specific
+	 ADD_DEFINITIONS(-DkMosekLicensePath="/Users/abigailcalderon/Downloads/mosek/mosek.lic") # Path to license file
 	 ADD_DEFINITIONS(-DEOLC_MOSEK)
  ENDIF()
  
@@ -99,7 +101,7 @@ ADD_EXECUTABLE(${CMAKE_PROJECT_NAME} ${SOURCES} ${HEADERS} ${GLSL} ${ARCSIMC} ${
 
 # Get the EIGEN environment variable. Since EIGEN is a header-only library, we
 # just need to add it to the include directory.
-SET(EIGEN3_INCLUDE_DIR "$ENV{EIGEN3_INCLUDE_DIR}")
+SET(EIGEN3_INCLUDE_DIR "/opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3")
 IF(NOT EIGEN3_INCLUDE_DIR)
   # The environment variable was not set
   SET(ERR_MSG "Please point the environment variable EIGEN3_INCLUDE_DIR to the root directory of your EIGEN installation.")
@@ -121,7 +123,7 @@ INCLUDE_DIRECTORIES(${EIGEN3_INCLUDE_DIR})
 IF(${ONLINE})
 	# Get the GLM environment variable. Since GLM is a header-only library, we
 	# just need to add it to the include directory.
-	SET(GLM_INCLUDE_DIR "$ENV{GLM_INCLUDE_DIR}")
+	SET(GLM_INCLUDE_DIR "/opt/homebrew/Cellar/glm/1.0.1/include/glm/")
 	IF(NOT GLM_INCLUDE_DIR)
 	  # The environment variable was not set
 	  SET(ERR_MSG "Please point the environment variable GLM_INCLUDE_DIR to the root directory of your GLM installation.")
@@ -142,7 +144,7 @@ IF(${ONLINE})
 
 	# Get the GLFW environment variable. There should be a CMakeLists.txt in the 
 	# specified directory.
-	SET(GLFW_DIR "$ENV{GLFW_DIR}")
+	SET(GLFW_DIR "/Users/abigailcalderon/Documents/GitHub/glfw")
 	IF(NOT GLFW_DIR)
 	  # The environment variable was not set
 	  SET(ERR_MSG "Please point the environment variable GLFW_DIR to the root directory of your GLFW installation.")
@@ -163,7 +165,12 @@ IF(${ONLINE})
 	OPTION(GLFW_BUILD_TESTS "GLFW_BUILD_TESTS" OFF)
 	OPTION(GLFW_BUILD_DOCS "GLFW_BUILD_DOCS" OFF)
 	IF(CMAKE_BUILD_TYPE MATCHES Release)
-	  ADD_SUBDIRECTORY(${GLFW_DIR} ${GLFW_DIR}/release)
+	SET(GLFW_INCLUDE_DIR "/opt/homebrew/Cellar/glfw/3.4/include")
+	SET(GLFW_LIB_DIR "/opt/homebrew/Cellar/glfw/3.4/lib")
+	
+	INCLUDE_DIRECTORIES(${GLFW_INCLUDE_DIR})
+	TARGET_LINK_LIBRARIES(${CMAKE_PROJECT_NAME} ${GLFW_LIB_DIR}/libglfw.dylib)
+	
 	ELSE()
 	  ADD_SUBDIRECTORY(${GLFW_DIR} ${GLFW_DIR}/debug)
 	ENDIF()
@@ -171,7 +178,7 @@ IF(${ONLINE})
 	TARGET_LINK_LIBRARIES(${CMAKE_PROJECT_NAME} glfw ${GLFW_LIBRARIES})
 
 	# Get the GLEW environment variable.
-	SET(GLEW_DIR "$ENV{GLEW_DIR}")
+	SET(GLEW_DIR "/opt/homebrew/Cellar/glew/2.2.0_1")
 	IF(NOT GLEW_DIR)
 	  # The environment variable was not set
 	  SET(ERR_MSG "Please point the environment variable GLEW_DIR to the root directory of your GLEW installation.")
@@ -193,13 +200,13 @@ IF(${ONLINE})
 	  # With prebuilt binaries
 	  TARGET_LINK_LIBRARIES(${CMAKE_PROJECT_NAME} ${GLEW_DIR}/lib/Release/x64/glew32s.lib)
 	ELSE()
-	  TARGET_LINK_LIBRARIES(${CMAKE_PROJECT_NAME} ${GLEW_DIR}/lib/libGLEW.a)
+	  TARGET_LINK_LIBRARIES(${CMAKE_PROJECT_NAME} ${GLEW_DIR}/lib/libGLEW.dylib)
 	ENDIF()
 ENDIF()
 
 # Get the MOSEK environment variable.
 IF(${MOSEK})
-	SET(MOSEK_DIR "$ENV{MOSEK_DIR}")
+	SET(MOSEK_DIR "/Users/abigailcalderon/Downloads/mosek/11.0/tools/platform/osxaarch64")
 	IF(NOT MOSEK_DIR)
 		# The environment variable was not set
 		SET(ERR_MSG "Please point the environment variable MOSEK_DIR to the root directory of your MOSEK installation.")

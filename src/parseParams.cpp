@@ -1,9 +1,9 @@
 #include "parseParams.h"
 
-#include "external\Json\json.h"
-#include "external\ArcSim\util.hpp"
-#include "external\ArcSim\vectors.hpp"
-#include "external\ArcSim\referenceshape.hpp"
+#include "external/Json/json.h"
+#include "external/ArcSim/util.hpp"
+#include "external/ArcSim/vectors.hpp"
+#include "external/ArcSim/referenceshape.hpp"
 
 #include "Cloth.h"
 #include "Constraints.h"
@@ -14,11 +14,11 @@
 #include "Shape.h"
 #include "GeneralizedSolver.h"
 
-#include <Eigen\Core>
+#include <Eigen/Core>
 
 #include <iostream>
 #include <vector>
-#include <omp.h>
+#include "/opt/homebrew/Cellar/libomp/19.1.7/include/omp.h"
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -37,6 +37,19 @@ void complainM(int msize, int gotsize) {
 	cout << "Expected " << msize << "elements, found " << gotsize << " instead" << endl;
 	abort();
 }
+
+// Declare the parse functions
+void parse(bool &b, const Json::Value &json);
+void parse(int &n, const Json::Value &json);
+void parse(double &x, const Json::Value &json);
+void parse(std::string &s, const Json::Value &json);
+void parse(Vector2i &v, const Json::Value &json);
+void parse(Vector2d &v, const Json::Value &json);
+void parse(Vector3d &v, const Json::Value &json);
+void parse(VectorXd &v, const Json::Value &json);
+
+// Then define the functions below or in another file
+
 
 template <typename T> void parse(vector<T> &v, const Json::Value &json) {
 	if (!json.isArray()) complain(json, "array");

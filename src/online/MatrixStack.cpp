@@ -6,6 +6,7 @@
 
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 
 using namespace std;

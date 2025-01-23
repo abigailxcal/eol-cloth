@@ -5,11 +5,11 @@
 #include <iostream>
 
 #ifdef EOLC_MOSEK
-#include "external\SolverWrappers\Mosek\QuadProgMosek.h"
+#include "external/SolverWrappers/Mosek/QuadProgMosek.h"
 #endif
 
 #ifdef EOLC_GUROBI
-#include "external\SolverWrappers\Gurobi\Gurobi.h"
+#include "external/SolverWrappers/Gurobi/Gurobi.h"
 #endif
 
 using namespace std;
@@ -116,32 +116,43 @@ bool GeneralizedSolver::velocitySolve(const bool& fixedPoints, const bool& colli
 	//		Aineq, bineq,
 	//		v);
 	//}
-
-	if (!collisions && false) {
-		// Simplest case, a cloth with no fixed points and no collisions
-		if (!fixedPoints) {
-			ConjugateGradient<SparseMatrix<double>, Lower | Upper> cg;
+	ConjugateGradient<SparseMatrix<double>, Lower | Upper> cg;
 			cg.compute(MDK);
+			std::cout << "#iterations:     " << cg.iterations() << std::endl;
+			std::cout << "estimated error: " << cg.error()      << std::endl;
 			v = cg.solve(-b);
 			//cout << v << endl;
 			return true;
-		}
-		else {
-			// If there are fixed points we can use KKT which is faster than solving a quadprog
-			// the assumption is made that MDK and b have been built properly uppon making it here
-			LeastSquaresConjugateGradient<SparseMatrix<double> > lscg;
-			lscg.compute(MDK);
-			v = lscg.solve(-b);
-			return true;
-		}
-	}
-	else {
-		if (whichSolver == GeneralizedSolver::NoSolver) {
-			cout << "The simulation has encountered a collision, but a quadratic programming solver has not been specified." << endl;
-			cout << "Please either set an external quadratic programming solver, or avoid collisions in your simulation." << endl;
-			abort();
-		}
-		else if (whichSolver == GeneralizedSolver::Mosek) {
+
+	// if (!collisions && true) {
+	// 	// Simplest case, a cloth with no fixed points and no collisions
+	// 	if (fixedPoints) {
+	// 		ConjugateGradient<SparseMatrix<double>, Lower | Upper> cg;
+	// 		cg.compute(MDK);
+	// 		std::cout << "#iterations:     " << cg.iterations() << std::endl;
+	// 		std::cout << "estimated error: " << cg.error()      << std::endl;
+	// 		v = cg.solve(-b);
+	// 		//cout << v << endl;
+	// 		return true;
+	// 	}
+	// 	// else {
+	// 	// 	std::cout << "didn't go thru CG     "  << std::endl;
+	// 	// 	// If there are fixed points we can use KKT which is faster than solving a quadprog
+	// 	// 	// the assumption is made that MDK and b have been built properly uppon making it here
+	// 	// 	LeastSquaresConjugateGradient<SparseMatrix<double> > lscg;
+	// 	// 	lscg.compute(MDK);
+	// 	// 	v = lscg.solve(-b);
+	// 	// 	return true;
+	// 	// }
+	// }
+	// else {
+	// 	std::cout << "didn't even go thru the if loop of CG     "  << std::endl;
+	// 	if (whichSolver == GeneralizedSolver::NoSolver) {
+	// 		cout << "The simulation has encountered a collision, but a quadratic programming solver has not been specified." << endl;
+	// 		cout << "Please either set an external quadratic programming solver, or avoid collisions in your simulation." << endl;
+	// 		abort();
+	// 	}
+		// else if (whichSolver == GeneralizedSolver::Mosek) {
 #ifdef EOLC_MOSEK
 			bool success = mosekSolve(MDK, b,
 				Aeq, beq,
@@ -153,8 +164,8 @@ bool GeneralizedSolver::velocitySolve(const bool& fixedPoints, const bool& colli
 			cout << "Attempting to use the mosek solver without mosek support enabled" << endl;
 			abort();
 #endif
-		}
-		else if (whichSolver == GeneralizedSolver::Gurobi) {
+		// }
+		// else if (whichSolver == GeneralizedSolver::Gurobi) {
 #ifdef EOLC_GUROBI
 			bool success = gurobiSolve(MDK, b,
 				Aeq, beq,
@@ -166,8 +177,9 @@ bool GeneralizedSolver::velocitySolve(const bool& fixedPoints, const bool& colli
 			cout << "Attempting to use the gurobi solver without gurobi support enabled" << endl;
 			abort();
 #endif
-		}
-	}
+		//}
+		
+	
 
-	return false;
+	
 }

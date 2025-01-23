@@ -388,7 +388,7 @@ template<> Eig<2> eigen_decomposition<2>(const Mat2x2 &A) {
 //	return svd;
 //}
 
-template SVD<3, 3> singular_value_decomposition<3, 3>(const Mat<3, 3> &);
+//template SVD<3, 3> singular_value_decomposition<3, 3>(const Mat<3, 3> &);
 
 template<> SVD<3, 2> singular_value_decomposition<3, 2>(const Mat<3, 2> &A) {
 	//SVD<3,2> svd0 = singular_value_decomposition0(A);

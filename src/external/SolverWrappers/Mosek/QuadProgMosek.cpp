@@ -229,7 +229,7 @@ static void __setMosekTask(const MSKtask_t &task) {
 }
 
 /// Used as logging output for our quadratic program
-static void MSKAPI __mosekLog(void *handle, MSKCONST char str[]) {
+static void MSKAPI __mosekLog(void *handle, const char str[]) {
 #ifdef _MEX_
 	mexPrintf("%s\n", str); // NOT WORKING!
 #else
@@ -537,7 +537,7 @@ bool QuadProgMosek::solve() {
 
 	MSKsolstae solsta;
 	MSK_getsolsta(task, MSK_SOL_ITR, &solsta);
-	return solsta == MSK_SOL_STA_OPTIMAL || solsta == MSK_SOL_STA_NEAR_OPTIMAL;
+	return solsta == MSK_SOL_STA_OPTIMAL || solsta == MSK_SOL_STA_DUAL_ILLPOSED_CER;
 }
 
 Eigen::VectorXd QuadProgMosek::getPrimalSolution() {

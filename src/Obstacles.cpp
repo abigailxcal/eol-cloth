@@ -4,8 +4,8 @@
 #include "Shape.h"
 
 #ifdef EOLC_ONLINE
-#include "online\MatrixStack.h"
-#include "online\Program.h"
+#include "online/MatrixStack.h"
+#include "online/Program.h"
 #endif // EOLC_ONLINE
 
 using namespace std;

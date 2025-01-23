@@ -82,17 +82,13 @@
 			0.0, 0.0, 1.0]
 			
 		],
-		
-		// Box definitions comma seperated
-		// Each instance of a box follows the structure [x y z xs xy xz xv yv zv xw yw zw]
-		// The x,y,z values are the center of the point
-		// The xs,ys,zs values are the scale along each local axis
-		// The xv,yv,zv values are the velocity along that local axis
-		// The xw,yw,zw values are the angular velocity around that local axis
-		The 
 		"boxes": [
-
+			[1.2, 1.5, 1.0,
+			0.9175, 0.4425, -0.549,
+			0.0, 0.0, 0.0,
+			0.0, 0.0, 0.0]
 		]
-	
+		
+		
 	}
 }

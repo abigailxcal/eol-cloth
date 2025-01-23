@@ -3,7 +3,7 @@
 #include "Points.h"
 
 #define EIGEN_DONT_ALIGN_STATICALLY
-#include <Eigen\Dense>
+#include <Eigen/Dense>
 
 using namespace std;
 using namespace Eigen;

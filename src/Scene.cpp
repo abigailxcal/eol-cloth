@@ -8,11 +8,11 @@
 #include "GeneralizedSolver.h"
 #include "matlabOutputs.h"
 
-#include "external\ArcSim\dynamicremesh.hpp"
+#include "external/ArcSim/dynamicremesh.hpp"
 
 #ifdef EOLC_ONLINE
-#include "online\MatrixStack.h"
-#include "online\Program.h"
+#include "online/MatrixStack.h"
+#include "online/Program.h"
 #endif // EOLC_ONLINE
 
 

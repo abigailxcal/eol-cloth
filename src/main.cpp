@@ -2,7 +2,7 @@
 #include <time.h>
 
 #ifdef EOLC_MOSEK
-#include "external\SolverWrappers\Mosek\QuadProgMosek.h"
+#include "external/SolverWrappers/Mosek/QuadProgMosek.h"
 #endif
 
 #ifdef EOLC_GUROBI

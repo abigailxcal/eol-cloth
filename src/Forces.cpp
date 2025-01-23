@@ -20,7 +20,7 @@
 #include "ComputeInertial.h"
 #include "ComputeMembrane.h"
 
-#include "external\ArcSim\util.hpp"
+#include "external/ArcSim/util.hpp"
 
 #include <iostream>
 #include <utility>

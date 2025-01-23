@@ -1,8 +1,8 @@
 #include "remeshExtension.h"
 
-#include "external\ArcSim\util.hpp"
-#include "external\ArcSim\blockvectors.hpp"
-#include "external\ArcSim\geometry.hpp"
+#include "external/ArcSim/util.hpp"
+#include "external/ArcSim/blockvectors.hpp"
+#include "external/ArcSim/geometry.hpp"
 
 RemeshOp split_edgeForced(Edge* edge, double d, double thresh) {
 	Mesh& mesh = *edge->n[0]->mesh;

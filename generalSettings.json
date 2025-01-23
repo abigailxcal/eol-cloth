@@ -1,11 +1,10 @@
-// General EOL Cloth settings
-// Not including a setting will fall back to its default
+
 {
 	
 	"online": true,
-	"exportObjs": false,
+	"exportObjs": true,
 	"exportTimings": false,
-	"RESOURCE_DIR": "D:/Git/eol-cloth/resources",
-	"OUTPUT_DIR": "D:/Git/eol-cloth/build/objs"
+	"RESOURCE_DIR": "/Users/abigailcalderon/Documents/GitHub/eol-cloth/resources",
+	"OUTPUT_DIR": "/Users/abigailcalderon/Documents/GitHub/eol-cloth/build/objs"
 	
 }

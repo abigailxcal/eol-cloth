@@ -2,11 +2,11 @@
 #ifndef __matlabOutputs__
 #define __matlabOutputs__
 
-#include "external\ArcSim\mesh.hpp"
+#include "external/ArcSim/mesh.hpp"
 
 #define EIGEN_DONT_ALIGN_STATICALLY
-#include <Eigen\Dense>
-#include <Eigen\Sparse>
+#include <Eigen/Dense>
+#include <Eigen/Sparse>
 
 #include <string>
 

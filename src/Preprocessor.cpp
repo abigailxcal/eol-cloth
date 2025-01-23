@@ -5,8 +5,8 @@
 #include "conversions.h"
 #include "UtilEOL.h"
 
-#include "external\ArcSim\geometry.hpp"
-#include "external\ArcSim\subset.hpp"
+#include "external/ArcSim/geometry.hpp"
+#include "external/ArcSim/subset.hpp"
 
 #include <stdlib.h>
 

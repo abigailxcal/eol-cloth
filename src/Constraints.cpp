@@ -22,8 +22,8 @@
 #include "FixedList.h"
 #include "conversions.h"
 //#include "external\ArcSim\mesh.hpp"
-#include "external\ArcSim\util.hpp"
-#include "external\ArcSim\geometry.hpp"
+#include "external/ArcSim/util.hpp"
+#include "external/ArcSim/geometry.hpp"
 
 #include <iostream>
 #include <utility>
